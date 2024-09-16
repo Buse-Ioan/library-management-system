@@ -3,7 +3,6 @@ package com.itschool.library.models.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
 @Entity
 @Table(name = "books")
 public class Book {
@@ -21,4 +20,45 @@ public class Book {
     private String genre;
 //    @Column(name = "copies_available")
 //    private int copiesAvailable;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 }

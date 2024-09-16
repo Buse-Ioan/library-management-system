@@ -23,7 +23,7 @@ public class BookServiceImpl implements BookService {
     public BookDTO createBook(BookDTO bookDTO) {
         Book bookEntity = objectMapper.convertValue(bookDTO, Book.class);
         Book bookEntityResponse = bookRepository.save(bookEntity);
-        log.info("Book with id {} was saved", bookEntityResponse.getId());
+      //  log.info("Book with id {} was saved", bookEntityResponse.getId());
 
         return objectMapper.convertValue(bookEntityResponse, BookDTO.class);
     }
