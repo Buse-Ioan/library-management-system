@@ -1,12 +1,11 @@
 package com.itschool.library.unit_tests;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itschool.library.models.dtos.BookDTO;
+import com.itschool.library.models.dtos.RequestBookDTO;
+import com.itschool.library.models.dtos.ResponseBookDTO;
 import com.itschool.library.models.entities.Book;
 import com.itschool.library.repositories.BookRepository;
 import com.itschool.library.services.BookServiceImpl;
-import org.apache.coyote.Request;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,12 +30,18 @@ class BookServiceImplTest {
     @Test
     void testCreateBook() {
         //given
-        BookDTO bookDTO = new BookDTO();
-        bookDTO.setId(1L);
-        bookDTO.setTitle("Test Title");
-        bookDTO.setAuthor("Test Author");
-        bookDTO.setIsbn("Test ISBN");
-        bookDTO.setGenre("Test Genre");
+        RequestBookDTO requestBookDTO = new RequestBookDTO();
+        requestBookDTO.setTitle("Test Title");
+        requestBookDTO.setAuthor("Test Author");
+        requestBookDTO.setIsbn("Test ISBN");
+        requestBookDTO.setGenre("Test Genre");
+
+        ResponseBookDTO responseBookDTO = new ResponseBookDTO();
+        responseBookDTO.setId(1L);
+        responseBookDTO.setTitle("Test Title");
+        responseBookDTO.setAuthor("Test Author");
+        responseBookDTO.setIsbn("Test ISBN");
+        responseBookDTO.setGenre("Test Genre");
 
         Book bookEntity = new Book();
         bookEntity.setId(1L);
@@ -52,16 +57,16 @@ class BookServiceImplTest {
         savedBookEntity.setIsbn("Test ISBN");
         savedBookEntity.setGenre("Test Genre");
 
-        when(objectMapper.convertValue(bookDTO, Book.class)).thenReturn(bookEntity);
-        when(bookRepository.save(bookEntity)).thenReturn(savedBookEntity);
-        when(objectMapper.convertValue(savedBookEntity, BookDTO.class)).thenReturn(bookDTO);
+        when(objectMapper.convertValue(requestBookDTO, Book.class)).thenReturn(bookEntity);
+        when(bookRepository.save(bookEntity)).thenReturn(bookEntity);
+        when(objectMapper.convertValue(savedBookEntity, ResponseBookDTO.class)).thenReturn(responseBookDTO);
 
         //when
-        BookDTO savedBookDTO = bookService.createBook(bookDTO);
+        ResponseBookDTO savedBookDTO = bookService.createBook(requestBookDTO);
 
         //then
         verify(bookRepository, times(1)).save(bookEntity);
-        assertEquals(bookDTO.getAuthor(), savedBookDTO.getAuthor());
-        assertEquals(bookDTO.getTitle(), savedBookDTO.getTitle());
+        assertEquals(requestBookDTO.getAuthor(), savedBookDTO.getAuthor());
+        assertEquals(requestBookDTO.getTitle(), savedBookDTO.getTitle());
     }
 }
