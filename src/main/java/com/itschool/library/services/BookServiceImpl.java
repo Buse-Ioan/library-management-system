@@ -2,7 +2,6 @@ package com.itschool.library.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itschool.library.exceptions.BookNotFoundException;
-import com.itschool.library.models.dtos.BookDTO;
 import com.itschool.library.models.dtos.RequestBookDTO;
 import com.itschool.library.models.dtos.ResponseBookDTO;
 import com.itschool.library.models.entities.Book;
@@ -53,7 +52,7 @@ public class BookServiceImpl implements BookService {
                 .and(BookSpecification.genreContains(genre));
 
         List<Book> books = bookRepository.findAll(spec);
-        log.info("{} book found", books.size());
+        log.info("{} books found", books.size());
 
         return books.stream()
                 .map(book -> objectMapper.convertValue(book, ResponseBookDTO.class))
