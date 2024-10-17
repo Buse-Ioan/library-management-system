@@ -1,8 +1,5 @@
 package com.itschool.library.models.dtos;
 
-import lombok.Data;
-
-
 public class BookDTO {
 
     private Long id;
