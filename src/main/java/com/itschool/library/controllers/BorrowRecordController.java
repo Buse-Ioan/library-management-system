@@ -18,7 +18,8 @@ public class BorrowRecordController {
     }
 
     @PostMapping("/api/borrow")
-    public ResponseEntity<ResponseBookDTO> borrowBook(@RequestBody BorrowRecordDTO borrowRecordDTO) {
+    public ResponseEntity<ResponseBookDTO> borrowBook(
+            @RequestBody BorrowRecordDTO borrowRecordDTO) {
         borrowRecordService.borrowBook(borrowRecordDTO);
         return ResponseEntity.noContent().build();
     }
