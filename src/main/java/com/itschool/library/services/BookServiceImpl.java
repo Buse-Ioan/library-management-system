@@ -35,7 +35,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public ResponseBookDTO updateBookCopies(Long bookId, int newCopiesAvailable) {
-        Book book = bookRepository.findById(bookId).orElseThrow(() -> new BookNotFoundException("Book with id " + bookId + " not found"));
+        Book book = bookRepository.findById(bookId)
+                .orElseThrow(() -> new BookNotFoundException("Book with id " + bookId + " not found"));
 
         book.setCopiesAvailable(newCopiesAvailable);
         Book updatedBook = bookRepository.save(book);

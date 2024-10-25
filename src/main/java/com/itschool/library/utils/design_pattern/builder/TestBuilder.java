@@ -8,5 +8,11 @@ public class TestBuilder {
                 .drink("some drink")
                 .side("some side dish")
                 .build();
+
+        Meal2 meal2 = new Meal2.Meal2Builder()
+                .mainCourse("main course")
+                .drink("drink")
+                .side("side")
+                .build();
     }
 }
